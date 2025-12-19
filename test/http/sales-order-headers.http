@@ -5,7 +5,7 @@
 @productid=3683827d-c574-4541-bd43-b5597db6ec34
 
 
-GET http://{{localhost}}/SalesOrderHeaders
+GET http://{{localhost}}/SalesOrderHeaders?$filter=id eq {{id}}&$expand=items
 Content-Type: application/json
 
 ###
@@ -16,6 +16,7 @@ Content-Type: application/json
 {
     "id": "{{id}}",
     "custumer_id": "{{customerid}}",
+    "totalAmount": 398,
     "items": [
         {
             "id":"5f533468-4d8b-45d2-95ec-f9e0c932da1f",
@@ -36,7 +37,7 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://{{localhost}}/SalesOrderHeaders(id=1234)
+DELETE  http://{{localhost}}/SalesOrderHeaders({{id}})
 Content-Type: application/json
 
 ###

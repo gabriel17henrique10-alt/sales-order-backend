@@ -1,20 +1,18 @@
 @localhost=localhost:4004/odata/v4/main
-
-
-
-GET http://{{localhost}}/Customers
+@id =923bdf29-d933-4e92-a8c0-75403df6f390
+GET http://{{localhost}}/Custumers
 Content-Type: application/json
 
 ###
 
-POST  http://{{{localhost}}}/Customers
+POST  http://{{localhost}}/Custumers
 Content-Type: application/json
 
 {
-    "id": "923bdf29-d933-4e92-a8c0-75403df6f390",
+    "id": "{{id}}",
     "firstName": "Gabriel",
     "lastName": "Pereira",
-    "email":"Gabriel@gmail.com",
+    "email":"Gabriel@gmail.com"
 }
 
 # entity Custumers{
@@ -23,3 +21,26 @@ Content-Type: application/json
 #         lastName: String(100);
 #         email: String(255);
 # }
+
+###
+
+DELETE  http://{{localhost}}/Custumers({{id}})
+Content-Type: application/json
+
+###
+
+PUT  http://{{localhost}}/Custumers(id={{id}})
+Content-Type: application/json
+
+{
+    "firstName": "Gabriel"
+}
+
+###
+
+PATCH  http://{{localhost}}/Custumers(id={{id}})
+Content-Type: application/json
+
+{
+    "firstName": "teste"
+}

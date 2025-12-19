@@ -1,0 +1,22 @@
+@localhost=localhost:4004/odata/v4/main
+@id=3683827d-c574-4541-bd43-b5597db6ec34
+
+# entity Products{
+#     key id: UUID;
+#         name: String(255);
+#         price: Decimal(15,2);  
+# }
+
+GET http://{{localhost}}/Products
+Content-Type: application/json
+
+###
+
+POST  http://{{localhost}}/Products
+Content-Type: application/json
+
+{
+    "id": "{{id}}",
+    "name": "pelúcia",
+    "price":2.99
+}
