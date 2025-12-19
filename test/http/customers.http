@@ -1,0 +1,25 @@
+@localhost=localhost:4004/odata/v4/main
+
+
+
+GET http://{{localhost}}/Customers
+Content-Type: application/json
+
+###
+
+POST  http://{{{localhost}}}/Customers
+Content-Type: application/json
+
+{
+    "id": "923bdf29-d933-4e92-a8c0-75403df6f390",
+    "firstName": "Gabriel",
+    "lastName": "Pereira",
+    "email":"Gabriel@gmail.com",
+}
+
+# entity Custumers{
+#     key id: UUID;
+#         firstName: String(20);
+#         lastName: String(100);
+#         email: String(255);
+# }
