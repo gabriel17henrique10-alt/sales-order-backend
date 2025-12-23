@@ -44,3 +44,8 @@ Content-Type: application/json
 {
     "firstName": "teste"
 }
+
+###
+
+GET http://{{localhost}}/Custumers?$filter=endswith(firstName,'-')
+Content-Type: application/json
