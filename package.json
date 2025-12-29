@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "dev": "DEBUG=db cds watch"
+    "dev": "DEBUG=db cds-tsx watch"
   },
   "private": true
 }
