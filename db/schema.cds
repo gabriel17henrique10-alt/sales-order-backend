@@ -18,6 +18,13 @@ entity SalesOrderItems{
         price: Decimal(15,2);
 }
 
+entity SalesOrderLogs {
+    key id: UUID;
+        header: Association to SalesOrderHeaders;
+        userData: LargeString;
+        orderData: LargeString;
+}
+
 entity Custumers{
     key id: UUID;
         firstName: String(20);
