@@ -1,7 +1,18 @@
 import cds, { db, Request, ResultsHandler, Service, services } from '@sap/cds';
 import { Custumers, SalesOrderItems, Products, SalesOrderItem, SalesOrderHeaders, Product } from '@models/sales';
 
+
 export default (service: Service) => {
+    service.before('READ', '*', (request: Request) => {
+        if(!request.user.is('read_only_user')){
+            return request.reject(403,'Forbidden');
+        };
+    });
+    service.before(['WRITE','DELETE'], '*', (request: Request) => {
+        if(!request.user.is('admin')){
+            return request.reject(403,'Forbidden');
+        };
+    });
     service.after('READ', 'Custumers', (results: Custumers) =>{
         results.forEach(custumer => {
             if(!custumer.email?.includes('@')){
