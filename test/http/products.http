@@ -9,11 +9,15 @@
 
 GET http://{{localhost}}/Products
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
+
 
 ###
 
 POST  http://{{localhost}}/Products
 Content-Type: application/json
+Authorization: Basic joaozinho:Inicial@12345
+
 
 {
     "id": "{{id}}",
