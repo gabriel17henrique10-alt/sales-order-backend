@@ -1,68 +1,40 @@
 import cds, { db, Request, ResultsHandler, Service, services } from '@sap/cds';
 import { Custumers, SalesOrderItems, Products, SalesOrderItem, SalesOrderHeaders, Product, SalesOrderLog } from '@models/sales';
-
+import { custumerController } from './factories/controllers/custumer';
+import { salesOrderHeaderController } from './factories/controllers/sales-order-header';
+import { CustumerServiceImpl } from './services/custumer/implementation';
+import { FullRequestParams } from './protocols';
 
 
 export default (service: Service) => {
     service.before('READ', '*', (request: Request) => {
-        if(request.user.is('read_only_user')){
-            return request.reject(403,'Forbidden');
-        };
+        // if(!request.user.is('read_only_user')){
+        //     return request.reject(403,'Não identificado');
+        // };
+        console.log(request.user.is("read_only_user"));
+        console.log(request.user.roles);
     });
     service.before(['WRITE','DELETE'], '*', (request: Request) => {
-        if(request.user.is('admin')){
-            return request.reject(403,'Forbidden');
-        };
+        // if(!request.user.is('admin')){
+        //     return request.reject(403,'Forbidden');
+        // };
     });
-    service.after('READ', 'Custumers', (results: Custumers) =>{
-        results.forEach(custumer => {
-            if(!custumer.email?.includes('@')){
-                custumer.email = `${custumer.email}@gmail.com`
-            }
-        })
+    service.after('READ', 'Custumers', (custumerList: Custumers, request) =>{
+        (request as unknown as FullRequestParams<Custumers>).results = custumerController.afterRead(custumerList);
     });
 
-    service.before('CREATE','SalesOrderHeaders', (request: Request) =>{
-        const params = request.data;
-        if (!params.custumer_id){
-            return request.reject(400, `Custumer invalido`)
-        }
-    });
+    // service.before('CREATE','SalesOrderHeaders', (request: Request) =>{
+    //     const result = salesOrderHeaderController.beforeCreate(request.data);
+    //     if (!params.custumer_id){
+    //         return request.reject(400, `Custumer invalido`)
+    //     }
+    // });
     service.before('CREATE', 'SalesOrderHeaders', async (request: Request) => {
-        const params = request.data;
-        if (!params.custumer_id) { //verificando de o o customer é valido
-            return request.reject(400, 'Custumer inválido');
-        }
-        if (!params.items || params.items?.length === 0) { //verifica se os itens são válidos
-            return request.reject(400, 'items  inválidos');
-        }
-        const custumerQuery = SELECT.one.from('sales.Custumers').where({id: params.customer_id});
-        const custumer = await cds.run(custumerQuery);
-        const items: SalesOrderItems = params.items;
-        if(!custumer) { //verifica se o custumer existe
-            return request.reject(404, 'Custumer não encontrado');
-        }
-        const productsIds: string[] = params.items.map((item: SalesOrderItem) => item.product_id);
-        const productsQuery = SELECT.from('sales.Products').where({id: productsIds});
-        const products: Products = await cds.run(productsQuery);
-        for (const item of items){
-            const dbProducts = products.find(product => product.id === item.product_id);
-            if (!dbProducts) { //verifica se o produto existe
-            return request.reject(404, `Produto ${item.product_id} não encontrado`);
-            }
-                if (dbProducts.stock === 0) {
-                return request.reject(400, `Produto ${db.name}(${dbProducts.id}) sem estoque disponível`);
-            }
-        }
-        let totalAmount = 0;
-        items.forEach(item => {
-            totalAmount += (item.price as number) * (item.quantity as  number);
-        })
-        if(totalAmount > 30000){
-            const discount = totalAmount * (30/100);
-            totalAmount = totalAmount - discount
-        }
-        request.data.totalAmount = totalAmount;
+         const result = await salesOrderHeaderController.beforeCreate(request.data);
+         if (result.hasError) {
+            return request.reject(400, result.error?.message as string)
+         }
+        request.data.totalAmount = result.totalAmount;
     });
     service.after('CREATE', 'SalesOerderHeaders', async (results: SalesOrderHeaders, request: Request) => {
         const headersAsArray = Array.isArray(results) ? results : [results] as SalesOrderHeaders;
@@ -85,7 +57,7 @@ export default (service: Service) => {
             const log = [{
             header_id: header.id,
             userData: userAsString,
-            orderData: headersAsString
+            orderData: headersAsString,
             }];
             await cds.create('sales.SalesOrderLogs').entries(log)
         }
