@@ -1,6 +1,6 @@
 {
     "{development}": {
-        "requires":{
+        "requires": {
             "db": {
                 "credentials": {
                     "database": ":memory:"
@@ -10,20 +10,20 @@
             "auth": {
                 "kind": "basic",
                 "users": {
-                    "gab":{
-                        "password": "Inicial@12345",
+                    "gab": {
+                        "password": "123456",
                         "roles": ["admin"],
                         "attr": {
                             "id": 1,
-                            "group": ["grupo1","grupo2"]
+                            "groups": ["grupo1","grupo2"]
                         }
                     },
-                    "joaozinho":{
-                        "password": "Inicial@12345",
+                    "joaozinho": {
+                        "password": "123456",
                         "roles": ["read_only_user"],
                         "attr": {
                             "id": 2,
-                            "group": ["grupo1"]
+                            "groups": ["grupo1"]
                         }
                     }
                 }
