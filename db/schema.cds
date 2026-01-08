@@ -18,7 +18,7 @@ entity SalesOrderItems{
         price: Decimal(15,2);
 }
 
-entity SalesOrderLogs {
+entity SalesOrderLogs: managed {
     key id: UUID;
         header: Association to SalesOrderHeaders;
         userData: LargeString;
