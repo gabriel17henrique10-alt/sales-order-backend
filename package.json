@@ -19,5 +19,23 @@
     "start": "cds-serve",
     "dev": "DEBUG=db cds-tsx watch"
   },
+  "cds": {
+  "requires": {
+    "auth": {
+      "kind": "basic",
+      "users": {
+        "joaozinho": {
+          "password": "123456",
+          "roles": ["read_only_user", "admin"],
+          "attr": {
+              "id": 2,
+              "groups": ["grupo1"]
+          }
+        }
+      }
+    }
+  }
+},
   "private": true
+  
 }

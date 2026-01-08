@@ -7,13 +7,13 @@
 
 GET http://{{localhost}}/SalesOrderHeaders?$filter=id eq {{id}}&$expand=items
 Content-Type: application/json
-Authorization: Basic joaozinho:Inicial@12345
+Authorization: Basic joaozinho:123456
 
 ###
 
 POST http://{{localhost}}/SalesOrderHeaders
 Content-Type: application/json
-Authorization: Basic joaozinho:Inicial@12345
+Authorization: Basic joaozinho:123456
 
 
 {
@@ -42,14 +42,14 @@ Authorization: Basic joaozinho:Inicial@12345
 
 DELETE  http://{{localhost}}/SalesOrderHeaders({{id}})
 Content-Type: application/json
-Authorization: Basic joaozinho:Inicial@12345
+Authorization: Basic joaozinho:123456
 
 
 ###
 
 PUT  http://{{localhost}}/SalesOrderHeaders(id=a8313aa5-0f17-40d8-9f42-0eddcbbc6d3e)
 Content-Type: application/json
-Authorization: Basic joaozinho:Inicial@12345
+Authorization: Basic joaozinho:123456
 
 
 {

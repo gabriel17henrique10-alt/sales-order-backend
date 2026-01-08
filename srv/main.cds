@@ -1,6 +1,6 @@
 using {sales} from '../db/schema';
 
-@requires: 'authenticate-user'
+@requires: 'read_only_user'
 service MainService{
     entity SalesOrderHeaders as projection on sales.SalesOrderHeaders;
     entity Custumers as projection on sales.Custumers;
