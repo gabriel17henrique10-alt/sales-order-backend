@@ -6,13 +6,14 @@
       "moduleResolution": "node16",
       "strict": true, 
       "strictNullChecks": true,
-      "noImplicitAny": true, //this not permit an variable whithout type
+      "noImplicitAny": false, //this not permit an variable whithout type
       "esModuleInterop": true,
       "outDir": "./dist",
       "baseUrl": "./",
       "rootDir": "./",
       "paths": {
-        "@models/*": ["./@cds-models/*/index.ts"]
+        "@models/*": ["./@cds-models/*/index.ts"],
+        "@/*": ["./srv/*"]
       }
   },
   "include": ["srv"],

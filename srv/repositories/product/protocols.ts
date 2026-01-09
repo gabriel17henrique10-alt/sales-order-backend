@@ -1,4 +1,4 @@
-import { ProductModel, ProductProps } from 'srv/models/products';
+import { ProductModel, ProductProps } from '@/models/products';
 
 export interface ProductRepository {
     findByIds(ids: ProductProps['id'][]): Promise<ProductModel[] | null>;

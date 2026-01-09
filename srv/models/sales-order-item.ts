@@ -1,4 +1,4 @@
-import { ProductModel } from './products';
+import { ProductModel } from '@/models/products';
 
 type SalesOrderItemProps = {
     id: string;
