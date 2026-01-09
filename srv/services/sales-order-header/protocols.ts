@@ -2,12 +2,11 @@ import { User } from '@sap/cds';
 
 import { SalesOrderHeader, SalesOrderHeaders } from '@models/sales';
 
-
 export type CreationPayLoadValidationResult = {
     hasError: boolean;
     totalAmount?: number;
     error?: Error;
-}
+};
 
 export interface SalesOrderHeaderService {
     beforeCreate(params: SalesOrderHeader): Promise<CreationPayLoadValidationResult>;

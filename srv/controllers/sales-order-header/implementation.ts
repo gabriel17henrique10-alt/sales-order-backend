@@ -4,8 +4,8 @@ import { SalesOrderHeaderService } from 'srv/services/sales-order-header/protoco
 import { CreationPayLoadValidationResult, SalesOrderHeaderController } from './protocols';
 import { SalesOrderHeader, SalesOrderHeaders } from '@models/sales';
 
-export  class SalesOrderHeadersControllerImpl implements SalesOrderHeaderController{
-    constructor(private readonly service: SalesOrderHeaderService){}
+export class SalesOrderHeadersControllerImpl implements SalesOrderHeaderController {
+    constructor(private readonly service: SalesOrderHeaderService) {}
 
     public async beforeCreate(params: SalesOrderHeader): Promise<CreationPayLoadValidationResult> {
         return this.service.beforeCreate(params);

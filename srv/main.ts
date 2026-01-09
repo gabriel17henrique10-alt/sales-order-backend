@@ -5,17 +5,16 @@ import { custumerController } from './factories/controllers/custumer';
 import { salesOrderHeaderController } from './factories/controllers/sales-order-header';
 import { Custumers, SalesOrderHeaders } from '@models/sales';
 
-
 export default (service: Service) => {
     service.before('READ', '*', (request: Request) => {
-        if(!request.user.is('read_only_user')){
-            return request.reject(403,'Não identificado');
-        };
+        if (!request.user.is('read_only_user')) {
+            return request.reject(403, 'Não identificado');
+        }
     });
-    service.before(['WRITE','DELETE'], '*', (request: Request) => {
-        if(!request.user.is('admin')){
-            return request.reject(403,'Forbidden');
-        };
+    service.before(['WRITE', 'DELETE'], '*', (request: Request) => {
+        if (!request.user.is('admin')) {
+            return request.reject(403, 'Forbidden');
+        }
     });
     service.before('CREATE', 'SalesOrderHeaders', async (request: Request) => {
         const result = await salesOrderHeaderController.beforeCreate(request.data);
@@ -24,7 +23,7 @@ export default (service: Service) => {
         }
         request.data.totalAmount = result.totalAmount;
     });
-    service.after('READ', 'Custumers', (custumerList: Custumers, request) =>{
+    service.after('READ', 'Custumers', (custumerList: Custumers, request) => {
         (request as unknown as FullRequestParams<Custumers>).results = custumerController.afterRead(custumerList);
     });
     service.after('CREATE', 'SalesOrderHeaders', async (salesOrderHeaders: SalesOrderHeaders, request: Request) => {

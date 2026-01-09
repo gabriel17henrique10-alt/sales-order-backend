@@ -9,4 +9,3 @@ export class CustumerControllerImpl implements CustumerController {
         return this.service.afterRead(custumerList);
     }
 }
-    

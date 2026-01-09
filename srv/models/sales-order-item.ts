@@ -6,21 +6,21 @@ type SalesOrderItemProps = {
     quantity: number;
     price: number;
     products: ProductModel[];
-}
+};
 
 type SalesOrderItemPropsWithoutId = Omit<SalesOrderItemProps, 'id'>;
 
 type CreationPayLoad = {
     product_id: SalesOrderItemProps['productId'];
-}
+};
 
 type CreationPayLoadValidationResult = {
     hasError: boolean;
     error?: Error;
-}
+};
 
 export class SalesOrderItemModel {
-    constructor(private props: SalesOrderItemProps) { }
+    constructor(private props: SalesOrderItemProps) {}
 
     public static create(props: SalesOrderItemPropsWithoutId): SalesOrderItemModel {
         return new SalesOrderItemModel({
@@ -49,8 +49,9 @@ export class SalesOrderItemModel {
     }
 
     public validateCreationPayload(params: CreationPayLoad): CreationPayLoadValidationResult {
-        const product = this.products.find(product => product.id === params.product_id);
-        if (!product) { //verifica se o produto existe
+        const product = this.products.find((product) => product.id === params.product_id);
+        if (!product) {
+            //verifica se o produto existe
             return {
                 hasError: true,
                 error: new Error(`Produto ${params.product_id} não encontrado`)

@@ -23,7 +23,8 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "dev": "DEBUG=db cds-tsx watch"
+    "dev": "DEBUG=db cds-tsx watch",
+    "lint": "eslint ./srv"
   },
   "cds": {
     "requires": {

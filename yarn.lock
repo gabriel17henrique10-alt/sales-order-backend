@@ -264,9 +264,9 @@
   integrity sha512-X+4v4LBAT8HIt0zr28/kJNS15nlNlcM97vAMW+agLrmK134nyBiMwUMcp8BMhxlG9B2PykrnAKH56D9O3tfoBg==
 
 "@sap/cds@^9":
-  version "9.6.1"
-  resolved "https://registry.yarnpkg.com/@sap/cds/-/cds-9.6.1.tgz#670de33b5c383f632591de828b3e45d350346965"
-  integrity sha512-Bx6asOBhYXBE+jB6FtmyHmAjoPi11MYb/v/AYpnp0jqL/+kAXXWo6YOxJHqpx1k5Um5FS1r6gM/5tVAo/ta7bw==
+  version "9.6.2"
+  resolved "https://registry.yarnpkg.com/@sap/cds/-/cds-9.6.2.tgz#b95994ea597b34f213ac89e54126f8b3bf6fec14"
+  integrity sha512-BBn2k3fZFfOC8Qmgo/kC9Sjs7ClhtVjf480++LmY/vtthfuybnLA2g4SdisTbCBVePALN44JNA339wVfHCAPSw==
   dependencies:
     "@sap/cds-compiler" "^6.3"
     "@sap/cds-fiori" "^2"
