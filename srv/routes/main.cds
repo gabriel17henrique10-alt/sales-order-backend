@@ -1,4 +1,4 @@
-using {sales} from '../db/schema';
+using {sales} from '../../db/schema';
 
 @requires: 'read_only_user'
 service MainService{
