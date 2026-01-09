@@ -1,4 +1,4 @@
-import { SalesOrderItemModel } from "./sales-order-item";
+import { SalesOrderItemModel } from './sales-order-item';
 
 type SalesOrderHeaderProps = {
     id: string;
@@ -66,19 +66,20 @@ export class SalesOrderHeaderModel {
         }
         return {
             hasError: false
-        }
+        };
         
     }
-    private validateCustumerOnCreation(custumerId: SalesOrderHeaderProps['custumerId']): CreationPayLoadValidationResult {
+    private validateCustumerOnCreation(custumerId: SalesOrderHeaderProps['custumerId']): 
+    CreationPayLoadValidationResult {
         if (!custumerId){
             return {
                 hasError: true,
                 error: new Error('Custumer invalido')
-            }
+            };
         }
         return {
             hasError: false
-        }
+        };
     }
     private validateItemsOnCreation(items: SalesOrderHeaderProps['items']): CreationPayLoadValidationResult {
         if (!items || items?.length === 0){
@@ -89,7 +90,7 @@ export class SalesOrderHeaderModel {
         }
         const itemsErrors: string[] = [];
         this.items.forEach(item => {
-            const validationResult = item.validateCreationPayload({product_id: item.productId});
+            const validationResult = item.validateCreationPayload({ product_id: item.productId });
             if (validationResult.hasError) {
                 itemsErrors.push(validationResult.error?.message as string);
             }
@@ -99,17 +100,17 @@ export class SalesOrderHeaderModel {
             return {
                 hasError: true,
                 error: new Error(messages)
-            }
+            };
         }
         return {
             hasError: false
-        }
+        };
     }
 
     public calculateTotalAmount(): number {
         let totalAmount = 0;
         this.items.forEach(item => {
-        totalAmount += (item.price as number) * (item.quantity as  number);
+            totalAmount += (item.price as number) * (item.quantity as  number);
         });
         return totalAmount;
     }
@@ -118,7 +119,7 @@ export class SalesOrderHeaderModel {
         let totalAmount = this.calculateTotalAmount();
         if (totalAmount > 30000) {
             const discount = totalAmount * (30/100);
-            totalAmount = totalAmount - discount
+            totalAmount = totalAmount - discount;
         }
         return totalAmount;
     }

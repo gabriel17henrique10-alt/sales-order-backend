@@ -1,4 +1,3 @@
-import { ProductRepositoryImpl } from "srv/repositories/product/implementation";
 
 type SalesOrderLogProps = {
     id: string;
@@ -9,7 +8,7 @@ type SalesOrderLogProps = {
 
 type SalesOrderLogWithoutIdProps = Omit<SalesOrderLogProps, 'id'>;
 
-type SalesOrderLogDbProps = Omit<SalesOrderLogProps, "headerId"> & {
+type SalesOrderLogDbProps = Omit<SalesOrderLogProps, 'headerId'> & {
     header_id: string;
 };
 
@@ -20,7 +19,7 @@ export class SalesOrderLogModel {
         return new SalesOrderLogModel({
             ...props,
             id: crypto.randomUUID()
-        })
+        });
     }
 
     public get id() {

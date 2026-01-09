@@ -12,9 +12,9 @@ type LoggedUserAttributesProps = {
 export class LoggedUserModel {
     constructor(private props: LoggedUserProps){}
 
-public static create(props: LoggedUserProps){
-    return new LoggedUserModel(props);
-}
+    public static create(props: LoggedUserProps){
+        return new LoggedUserModel(props);
+    }
 
     public get id() {
         return this.props.id;

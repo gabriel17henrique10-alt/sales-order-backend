@@ -1,16 +1,16 @@
 import { User } from '@sap/cds';
 
-import { Product, SalesOrderHeader, SalesOrderHeaders, SalesOrderItem } from "@models/sales";
-import { SalesOrderHeaderService, CreationPayLoadValidationResult } from "./protocols";
+import { CustumerModel } from 'srv/models/custumer';
+import { CustumerRepository } from 'srv/repositories/custumer/protocols';
+import { LoggedUserModel } from 'srv/models/logged-user';
+import { ProductModel } from 'srv/models/products';
+import { ProductRepository } from '../../repositories/product/protocols';
 import { SalesOrderHeaderModel } from '../../models/sales-order-header'; 
-import { SalesOrderItemModel } from "../../models/sales-order-item";
-import { ProductRepository} from "../../repositories/product/protocols";
-import { CustumerRepository } from "srv/repositories/custumer/protocols";
-import { ProductModel } from "srv/models/products";
-import { CustumerModel } from "srv/models/custumer";
-import { SalesOrderLogModel } from "srv/models/sales-order-log";
-import { SalesOrderLogRepository } from "srv/repositories/sales-order-log/protocols";
-import { LoggedUserModel } from "srv/models/logged-user";
+import { SalesOrderItemModel } from '../../models/sales-order-item';
+import { SalesOrderLogModel } from 'srv/models/sales-order-log';
+import { SalesOrderLogRepository } from 'srv/repositories/sales-order-log/protocols';
+import { CreationPayLoadValidationResult, SalesOrderHeaderService } from './protocols';
+import { SalesOrderHeader, SalesOrderHeaders, SalesOrderItem } from '@models/sales';
 
 export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     constructor(
@@ -25,7 +25,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
             return {
                 hasError: true,
                 error: new Error('nenhum produto da lista de itens foi encontrado.')
-            }
+            };
         }
         const item = this.getSalesOrderItems(params, products);
         const header = this.getSalesOrderHeader(params, item);
@@ -34,18 +34,18 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
             return {
                 hasError: true,
                 error: new Error('Customer não encontrado')
-            }
+            };
         }
         const headervalidationResult = header.validateCreationPayload({ custumer_id: custumer.id });
         if (headervalidationResult.hasError) {
-            return headervalidationResult
+            return headervalidationResult;
 
         }
 
         return {
             hasError: false,
             totalAmount: header.calculateDiscount()
-        }
+        };
     }
 
     public async afterCreate(params: SalesOrderHeaders, loggedUser: User): Promise<void> {
@@ -104,19 +104,19 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
 
     private getLoggedUser(loggedUser: User): LoggedUserModel {
         return LoggedUserModel.create({
-                id: loggedUser.id,
-                roles: loggedUser.roles as string[],
-                attributes: {
-                    id: loggedUser.attr.id as unknown as number,
-                    groups: loggedUser.attr.groups as unknown as string[]
-                }
-            });
+            id: loggedUser.id,
+            roles: loggedUser.roles as string[],
+            attributes: {
+                id: loggedUser.attr.id as unknown as number,
+                groups: loggedUser.attr.groups as unknown as string[]
+            }
+        });
     }
     private getSalesOrderLog(salesOrderHeader: SalesOrderHeaderModel, user: LoggedUserModel): SalesOrderLogModel {
         return SalesOrderLogModel.create({
-                headerId: salesOrderHeader.id,
-                orderData: salesOrderHeader.toSringfiedObject(),
-                userData: user.toSringfiedObject()
+            headerId: salesOrderHeader.id,
+            orderData: salesOrderHeader.toSringfiedObject(),
+            userData: user.toSringfiedObject()
         });
     }
 }

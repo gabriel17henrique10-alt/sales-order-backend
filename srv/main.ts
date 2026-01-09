@@ -1,9 +1,9 @@
-import cds, { db, Request, Service } from '@sap/cds';
-import { Custumers, SalesOrderItems, Products, SalesOrderItem, SalesOrderHeaders, Product, SalesOrderLog } from '@models/sales';
+import { Request, Service } from '@sap/cds';
+
+import { FullRequestParams } from './protocols';
 import { custumerController } from './factories/controllers/custumer';
 import { salesOrderHeaderController } from './factories/controllers/sales-order-header';
-import { FullRequestParams } from './protocols';
-import { userInfo } from 'node:os';
+import { Custumers, SalesOrderHeaders } from '@models/sales';
 
 
 export default (service: Service) => {
@@ -17,17 +17,17 @@ export default (service: Service) => {
             return request.reject(403,'Forbidden');
         };
     });
-        service.before('CREATE', 'SalesOrderHeaders', async (request: Request) => {
-         const result = await salesOrderHeaderController.beforeCreate(request.data);
-         if (result.hasError) {
-            return request.reject(400, result.error?.message as string)
-         }
+    service.before('CREATE', 'SalesOrderHeaders', async (request: Request) => {
+        const result = await salesOrderHeaderController.beforeCreate(request.data);
+        if (result.hasError) {
+            return request.reject(400, result.error?.message as string);
+        }
         request.data.totalAmount = result.totalAmount;
     });
     service.after('READ', 'Custumers', (custumerList: Custumers, request) =>{
         (request as unknown as FullRequestParams<Custumers>).results = custumerController.afterRead(custumerList);
     });
     service.after('CREATE', 'SalesOrderHeaders', async (salesOrderHeaders: SalesOrderHeaders, request: Request) => {
-       await salesOrderHeaderController.afterCreate(salesOrderHeaders, request.user);
+        await salesOrderHeaderController.afterCreate(salesOrderHeaders, request.user);
     });
-}
+};
