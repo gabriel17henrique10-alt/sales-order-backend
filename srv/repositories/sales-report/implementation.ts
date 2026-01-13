@@ -11,20 +11,32 @@ export class SalesReportRepositoryImpl implements SalesReportRepository {
         subtractedDays.setDate(subtractedDays.getDate() - days);
         const subtractedDaysISOString = subtractedDays.toISOString();
 
-        const sql = SELECT.from('sales.SalesOrderHeaders')
-            .columns(
-                'id as salesOrderId',
-                'totalAmount as salesOrderTotalAmount',
-                'custumer.id as customerId',
-                // eslint-disable-next-line quotes
-                `custumer.firstName  || ' ' || custumer.lastName as custumerFullName`
-            )
-            .where({ createdAt: { between: subtractedDaysISOString, and: today } });
-        const SalesReports = await cds.run(sql);
-        if (SalesReports.length === 0) {
+        const sql = this.getReportBaseSql().where({ createdAt: { between: subtractedDaysISOString, and: today } });
+        const salesReports = await cds.run(sql);
+        return this.mapReportResult(salesReports);
+    }
+
+    public async findByCustomerId(customerId: string): Promise<SalesReportModel[] | null> {
+        const sql = this.getReportBaseSql().where({ customer_id: customerId });
+        const salesReports = await cds.run(sql);
+        return this.mapReportResult(salesReports);
+    }
+
+    private getReportBaseSql(): cds.ql.SELECT<unknown, unknown> {
+        return SELECT.from('sales.SalesOrderHeaders').columns(
+            'id as salesOrderId',
+            'totalAmount as salesOrderTotalAmount',
+            'custumer.id as customerId',
+            // eslint-disable-next-line quotes
+            `custumer.firstName  || ' ' || custumer.lastName as custumerFullName`
+        );
+    }
+
+    private mapReportResult(salesReports: SalesReportByDays[]): SalesReportModel[] | null {
+        if (salesReports.length === 0) {
             return null;
         }
-        return SalesReports.map((salesReport: SalesReportByDays) =>
+        return salesReports.map((salesReport: SalesReportByDays) =>
             SalesReportModel.with({
                 salesOrderId: salesReport.salesOrderId as string,
                 salesOrderTotalAmount: salesReport.salesOrderTotalAmount as number,
