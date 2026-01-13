@@ -7,6 +7,7 @@ import { Custumers, SalesOrderHeaders } from '@models/sales';
 import { FullRequestParams } from '@/routes/protocols';
 import { custumerController } from '@/factories/controllers/custumer';
 import { salesOrderHeaderController } from '@/factories/controllers/sales-order-header';
+import { salesReportController } from '@/factories/controllers/sales-report';
 
 export default (service: Service) => {
     service.before('READ', '*', (request: Request) => {
@@ -31,5 +32,9 @@ export default (service: Service) => {
     });
     service.after('CREATE', 'SalesOrderHeaders', async (salesOrderHeaders: SalesOrderHeaders, request: Request) => {
         await salesOrderHeaderController.afterCreate(salesOrderHeaders, request.user);
+    });
+    service.on('getSalesReportByDays', async (request: Request) => {
+        const days = request.data?.days || 7;
+        return salesReportController.findByDays(days);
     });
 };
