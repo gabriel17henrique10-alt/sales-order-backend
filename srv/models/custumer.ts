@@ -29,7 +29,7 @@ export class CustumerModel {
     }
 
     public setDefaultEmailDomain(): CustumerModel {
-        if (!this.props.email.includes('@')) {
+        if (!this.props.email?.includes('@')) {
             this.props.email = `${this.props.email}@gmailcom`;
         }
         return this;
