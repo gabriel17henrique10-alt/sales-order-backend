@@ -1,0 +1,45 @@
+@localhost=localhost:4004/odata/v4/main
+@id=dc241386-2686-49ab-b3c5-94cfc679678e
+@customerid =923bdf29-d933-4e92-a8c0-75403df6f390
+
+@productid=3683827d-c574-4541-bd43-b5597db6ec34
+
+
+GET http://{{localhost}}/SalesOrderHeaders?$filter=id eq {{id}}&$expand=items
+Content-Type: application/json
+Authorization: Basic joaozinho:123456
+
+###
+
+POST http://{{localhost}}/bulkCreateSalesOrder
+Content-Type: application/json
+Authorization: Basic joaozinho:123456
+
+
+{
+    "payload": [
+        {
+            "id": "{{id}}",
+            "custumer_id": "{{customerid}}",
+            "totalAmount": 398,
+            "items": [
+                {
+                    "id":"5f533468-4d8b-45d2-95ec-f9e0c932da1f",
+                    "header_id": "{{id}}",
+                    "product_id": "{{productid}}",
+                    "quantity": 10,
+                    "price": 2.99
+                },
+                {
+                    "id":"9cdc20c4-7b0f-4d18-b3eb-4c63abb0e941",
+                    "header_id": "{{id}}",
+                    "product_id": "{{productid}}",
+                    "quantity":5,
+                    "price": 1.99
+                }
+            ]
+        }
+    ]
+}
+
+###
