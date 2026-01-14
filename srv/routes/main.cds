@@ -1,5 +1,5 @@
 using {sales} from '../../db/schema';
-using { db.types.SalesReport } from '../../db/types';
+using { db.types.SalesReport, db.types.BulkCreateSalesOrder } from '../../db/types';
 
 @requires: 'read_only_user'
 service MainService{
@@ -10,8 +10,15 @@ service MainService{
     };
     entity Products as projection on sales.Products;
     entity SalesOrderLogs as projection on sales.SalesOrderLogs;
+
+
+}
+
+// functions
+extend service MainService with {
+    function getSalesReportByDays(days: SalesReport.Params: days) returns array of SalesReport.ExpectedResult;
 }
 
 extend service MainService with {
-    function getSalesReportByDays(days: SalesReport.Params: days) returns array of SalesReport.ExpectedResult;
+    action bulkCreateSalesOrder(payload: array of BulkCreateSalesOrder.Payload) returns array of BulkCreateSalesOrder.ExpectedResult;
 }
