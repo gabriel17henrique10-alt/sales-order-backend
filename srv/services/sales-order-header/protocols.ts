@@ -11,6 +11,7 @@ export type CreationPayLoadValidationResult = {
     products?: ProductModel[];
     custumer?: CustumerModel;
     error?: Error;
+    headers?: BulkCreateSalesOrdersPayload[];
 };
 
 export interface SalesOrderHeaderService {
