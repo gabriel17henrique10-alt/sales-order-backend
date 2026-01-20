@@ -15,11 +15,11 @@ build-parameters:
 
 modules:
   - name: sales-order-backend-service
-    type: node.js
+    type: nodejs
     path: gen/srv
     parameters:
       buildpack: nodejs_buildpack
-      disk-quota: 256M
+      disk-quota: 1024M
       memory: 512M
     build-parameters:
       builder: custom
@@ -54,7 +54,7 @@ modules:
     parameters:
       buildpack: nodejs_buildpack
       disk-quota: 256M
-      memory: 512M
+      memory: 256M
     build-parameters:
       builder: custom
       commands:
