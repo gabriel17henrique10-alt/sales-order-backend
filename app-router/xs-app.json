@@ -2,10 +2,10 @@
     "authenticationMethod": "route",
     "routes": [
         {
-            "source": "^/sales-order/(.*)",
+            "source": "^/sales-order/(.*)$",
             "destination": "srv-api",
-            "csrfProtection": true,
-            "authenticationType": "xsuaa"
+            "authenticationType": "xsuaa",
+            "csrfProtection": true
         }
     ]
 }
