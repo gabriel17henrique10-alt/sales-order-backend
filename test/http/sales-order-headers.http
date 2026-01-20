@@ -63,3 +63,17 @@ GET http://localhost:4004/odata/v4/main/SalesOrderHeaders?$filter=totalAmount ge
 ###
 
 GET http://localhost:4004/odata/v4/main/SalesOrderHeaders?$filter=totalAmount le 200000
+
+###
+
+# funcionalidade de clonar pedidos
+
+POST http://{{localhost}}/SalesOrderHeaders(4782978d-0c0d-408c-9313-66d83d57fcb5)/cloneSalesOrder
+Content-Type: application/json
+Authorization: Basic joaozinho:123456
+
+{}
+
+#http://localhost:4004/odata/v4/main/SalesOrderHeaders(4782978d-0c0d-408c-9313-66d83d57fcb5)
+
+
