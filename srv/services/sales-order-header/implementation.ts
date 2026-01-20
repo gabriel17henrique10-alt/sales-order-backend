@@ -86,17 +86,34 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
             if (custumerValidationResult.hasError) {
                 return custumerValidationResult;
             }
-            const headervalidationResult = header.validateCreationPayload({
+            const headerValidationResult = header.validateCreationPayload({
                 custumer_id: (custumerValidationResult.custumer as CustumerModel).id
             });
-            if (headervalidationResult.hasError) {
-                return headervalidationResult;
+            if (headerValidationResult.hasError) {
+                return headerValidationResult;
             }
             bulkCreateHeaders.push(header);
         }
         await this.salesOrderHeaderRepository.bulkCreate(bulkCreateHeaders);
         await this.afterCreate(headers, loggedUser);
         return this.serializeBulkCreateResult(bulkCreateHeaders);
+    }
+
+    public async cloneSalesOrder(id: string, loggedUser: User): Promise<CreationPayLoadValidationResult> {
+        const header = await this.salesOrderHeaderRepository.findCompleteSalesOrderById(id);
+        if (!header) {
+            return {
+                hasError: true,
+                error: new Error('Pedido não encontrado')
+            };
+        }
+        const headerValidationResult = header.validateCreationPayload({ custumer_id: header.custumer_id });
+        if (headerValidationResult.hasError) {
+            return headerValidationResult;
+        }
+        await this.salesOrderHeaderRepository.bulkCreate([header]);
+        await this.afterCreate([header.toCreationObject()], loggedUser);
+        return this.serializeBulkCreateResult([header]);
     }
 
     private serializeBulkCreateResult(headers: SalesOrderHeaderModel[]): CreationPayLoadValidationResult {
