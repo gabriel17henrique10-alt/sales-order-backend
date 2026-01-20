@@ -8,11 +8,11 @@
             "description": "UAA user"
         },
         {
-            "name": "$XASAPPNAME.admin",
+            "name": "$XSAPPNAME.admin",
             "description": "Admin user"
         },
         {
-            "name": "$XASAPPNAME.read_only_user",
+            "name": "$XSAPPNAME.read_only_user",
             "description": "ReadOnly user"
         }
     ],
@@ -46,7 +46,7 @@
                 "groups"
             ],
             "scope-references": [
-                "$XASAPPNAME.admin"
+                "$XSAPPNAME.admin"
             ]
         },
         {
@@ -57,8 +57,13 @@
                 "groups"
             ],
             "scope-references": [
-                "$XASAPPNAME.read_only_user"
+                "$XSAPPNAME.read_only_user"
             ]
         }
-    ]
+    ],
+    "oauth2-configuration": {
+        "redirect-uris": [
+            "https://53fefce3trial-*/**"
+        ]
+    }
 }
