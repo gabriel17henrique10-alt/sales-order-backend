@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "dependencies": {
+    "@cap-js/hana": "^2.5.1",
     "@sap/cds": "^9.6.3",
+    "@sap/xssec": "^4.12.2",
     "express": "^4",
-    "module-alias": "^2.2.3"
+    "module-alias": "^2.2.3",
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/cds-typer": "^0.38.0",
@@ -39,28 +42,6 @@
     "build": "mbt build --mtar sales-order-backend",
     "deploy": "cf deploy mta_archives/sales-order-backend.mtar --retries 0",
     "bd": "npm-run-all clean build deploy"
-  },
-  "cds": {
-    "requires": {
-      "auth": {
-        "kind": "basic",
-        "users": {
-          "joaozinho": {
-            "password": "123456",
-            "roles": [
-              "read_only_user",
-              "admin"
-            ],
-            "attr": {
-              "id": 2,
-              "groups": [
-                "grupo1"
-              ]
-            }
-          }
-        }
-      }
-    }
   },
   "private": true
 }
