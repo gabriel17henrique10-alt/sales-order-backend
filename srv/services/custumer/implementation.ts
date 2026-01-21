@@ -1,12 +1,13 @@
+import { Either, left, right } from '@sweet-monads/either';
+
 import { Custumers } from '@models/sales';
 
 import { CustumerModel } from '@/models/custumer';
 import { CustumerService } from '@/services/custumer/protocols';
-import { left } from '@sweet-monads/either';
-import { ServerError } from '@/errors/server-error';
+import { AbstractError, ServerError } from '@/errors';
 
 export class CustumerServiceImpl implements CustumerService {
-    public afterRead(custumerList: Custumers): Custumers {
+    public afterRead(custumerList: Custumers): Either<AbstractError, Custumers> {
         try {
             const custumers = custumerList.map((c) => {
                 const custumer = CustumerModel.with({
@@ -17,7 +18,7 @@ export class CustumerServiceImpl implements CustumerService {
                 });
                 return custumer.setDefaultEmailDomain().toObject();
             });
-            return custumers;
+            return right(custumers);
         } catch (error) {
             const errorInstance: Error = error as Error;
             return left(new ServerError(errorInstance.stack as string, errorInstance.message));
