@@ -29,7 +29,11 @@ export default (service: Service) => {
         request.data.totalAmount = result.totalAmount;
     });
     service.after('READ', 'Custumers', (custumerList: Custumers, request) => {
-        (request as unknown as FullRequestParams<Custumers>).results = custumerController.afterRead(custumerList);
+        const result = custumerController.afterRead(custumerList);
+        if (result.status >= 400) {
+            return request.error(result.status, result.data as string);
+        }
+        (request as unknown as FullRequestParams<Custumers>).results = result.data as Custumers;
     });
     service.after('CREATE', 'SalesOrderHeaders', async (salesOrderHeaders: SalesOrderHeaders, request: Request) => {
         await salesOrderHeaderController.afterCreate(salesOrderHeaders, request.user);
