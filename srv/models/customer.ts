@@ -1,6 +1,6 @@
 export type CustomerProps = {
     id: string;
-    fisrtName: string;
+    firstName: string;
     lastName: string;
     email: string;
 };
@@ -16,8 +16,8 @@ export class CustomerModel {
         return this.props.id;
     }
 
-    public get fisrtName() {
-        return this.props.fisrtName;
+    public get firstName() {
+        return this.props.firstName;
     }
 
     public get lastName() {
@@ -29,8 +29,11 @@ export class CustomerModel {
     }
 
     public setDefaultEmailDomain(): CustomerModel {
-        if (!this.props.email?.includes('@')) {
-            this.props.email = `${this.props.email}@gmailcom`;
+        if (!this.props.email) {
+            return this;
+        }
+        if (!this.props.email.includes('@')) {
+            this.props.email = `${this.props.email}@gmail.com`;
         }
         return this;
     }
@@ -38,7 +41,7 @@ export class CustomerModel {
     public toObject(): CustomerProps {
         return {
             id: this.props.id,
-            fisrtName: this.props.fisrtName,
+            firstName: this.props.firstName,
             lastName: this.props.lastName,
             email: this.props.email
         };
