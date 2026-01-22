@@ -1,4 +1,4 @@
-import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReportByDays';
+import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReport';
 
 import { SalesReportController } from '@/controllers/sales-report/protocols';
 import { SalesReportService } from '@/services/sales-report/protocols';

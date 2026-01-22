@@ -1,6 +1,6 @@
 import { Either } from '@sweet-monads/either';
 
-import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReportByDays';
+import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReport';
 
 import { AbstractError } from '@/errors';
 
