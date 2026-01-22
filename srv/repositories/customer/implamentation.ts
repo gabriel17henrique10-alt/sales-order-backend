@@ -12,7 +12,7 @@ export class CustomerRepositoryImpl implements CustomerRepository {
         }
         return CustomerModel.with({
             id: dbcustomer.id as string,
-            fisrtName: dbcustomer.firstName as string,
+            firstName: dbcustomer.firstName as string,
             lastName: dbcustomer.lastName as string,
             email: dbcustomer.email as string
         });
