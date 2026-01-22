@@ -22,6 +22,7 @@
     "@types/express": "^5.0.6",
     "@types/module-alias": "^2.0.4",
     "@types/node": "^25.0.3",
+    "@vitest/coverage-v8": "^4.0.17",
     "chai": "^6.2.2",
     "eslint": "^9.39.2",
     "eslint-plugin-prettier": "^5.5.4",
@@ -33,7 +34,8 @@
     "rimraf": "^6.1.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.52.0"
+    "typescript-eslint": "^8.52.0",
+    "vitest": "^4.0.17"
   },
   "scripts": {
     "start": "cds-serve",
@@ -42,7 +44,8 @@
     "clean": "rimraf gen dist mta_archives Makefile*",
     "build": "mbt build --mtar sales-order-backend",
     "deploy": "cf deploy mta_archives/sales-order-backend.mtar --retries 0",
-    "bd": "npm-run-all clean build deploy"
+    "bd": "npm-run-all clean build deploy",
+    "test:unit": "vitest --dir test/unit"
   },
   "private": true,
   "imports": {
