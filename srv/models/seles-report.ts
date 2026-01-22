@@ -28,8 +28,8 @@ export class SalesReportModel {
         return {
             salesOrderId: this.props.salesOrderId,
             salesOrderTotalAmount: this.props.salesOrderTotalAmount,
-            customerFullName: this.props.customerId,
-            customerId: this.props.customerFullName
+            customerFullName: this.props.customerFullName,
+            customerId: this.props.customerId
         };
     }
 }
