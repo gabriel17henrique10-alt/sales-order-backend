@@ -4,7 +4,7 @@ namespace db.types.BulkCreateSalesOrder;
 
 type Payload {
     id: sales.SalesOrderHeaders:id;
-    custumer_id: sales.Custumers:id;
+    custumer_id: sales.Customers:id;
     totalAmount: sales.SalesOrderHeaders: totalAmount;
     items: array of ItemsPayload;
 }

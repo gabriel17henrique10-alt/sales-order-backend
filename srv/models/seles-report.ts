@@ -1,8 +1,8 @@
 type SalesReportProps = {
     salesOrderId: string;
     salesOrderTotalAmount: number;
-    custumerId: string;
-    custumerFullName: string;
+    customerId: string;
+    customerFullName: string;
 };
 
 export class SalesReportModel {
@@ -17,19 +17,19 @@ export class SalesReportModel {
     public get salesOrderTotalAmount() {
         return this.props.salesOrderTotalAmount;
     }
-    public get custumerId() {
-        return this.props.custumerId;
+    public get customerId() {
+        return this.props.customerId;
     }
-    public get custumerFullName() {
-        return this.props.custumerFullName;
+    public get customerFullName() {
+        return this.props.customerFullName;
     }
 
     public toObject(): SalesReportProps {
         return {
             salesOrderId: this.props.salesOrderId,
             salesOrderTotalAmount: this.props.salesOrderTotalAmount,
-            custumerFullName: this.props.custumerId,
-            custumerId: this.props.custumerFullName
+            customerFullName: this.props.customerId,
+            customerId: this.props.customerFullName
         };
     }
 }

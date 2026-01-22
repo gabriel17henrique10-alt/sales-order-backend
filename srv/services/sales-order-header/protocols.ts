@@ -1,7 +1,7 @@
 import { User } from '@sap/cds';
 
 import { Payload as BulkCreateSalesOrdersPayload } from '@models/db/types/BulkCreateSalesOrder';
-import { CustumerModel } from '@/models/custumer';
+import { CustomerModel } from '@/models/customer';
 import { ProductModel } from '@/models/products';
 import { SalesOrderHeader, SalesOrderHeaders } from '@models/sales';
 
@@ -9,7 +9,7 @@ export type CreationPayLoadValidationResult = {
     hasError: boolean;
     totalAmount?: number;
     products?: ProductModel[];
-    custumer?: CustumerModel;
+    customer?: CustomerModel;
     error?: Error;
     headers?: BulkCreateSalesOrdersPayload[];
 };

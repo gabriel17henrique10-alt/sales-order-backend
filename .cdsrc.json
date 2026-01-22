@@ -1,32 +1,32 @@
 {
-    "{development}": {
+    "[development]": {
         "requires": {
             "db": {
                 "credentials": {
                     "database": ":memory:"
                 },
-                "kind": "sqlite"
+            "kind": "sqlite"
             },
             "auth": {
-                "kind": "basic",
-                "users": {
-                    "gab": {
-                        "password": "123456",
-                        "roles": ["admin"],
-                        "attr": {
-                            "id": 1,
-                            "groups": ["grupo1","grupo2"]
-                        }
-                    },
-                    "joaozinho": {
-                        "password": "123456",
-                        "roles":["read_only_user"],
-                        "attr": {
-                            "id": 2,
-                            "groups": ["grupo1"]
-                        }
+            "kind": "basic",
+            "users": {
+                "gab": {
+                    "password": "123456",
+                    "roles": ["admin"],
+                    "attr": {
+                        "id": 1,
+                        "groups": ["grupo1", "grupo2"]
+                    }
+                },
+                "joaozinho": {
+                    "password": "123456",
+                    "roles": ["read_only_user"],
+                    "attr": {
+                        "id": 2,
+                        "groups": ["grupo1"]
                     }
                 }
+            }
             }
         }
     },

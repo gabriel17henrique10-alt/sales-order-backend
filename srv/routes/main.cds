@@ -9,7 +9,7 @@ service MainService{
         action cloneSalesOrder() returns Boolean;
     };
     entity SalesOrderStatuses as  projection on sales.SalesOrderStatuses;
-    entity Custumers as projection on sales.Custumers actions{
+    entity Customers as projection on sales.Customers actions{
         function getSalesReportByCustomerId() returns array of SalesReport.ExpectedResult;
     };
     entity Products as projection on sales.Products;

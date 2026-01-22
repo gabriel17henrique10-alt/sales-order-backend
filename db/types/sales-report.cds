@@ -10,7 +10,7 @@ type Params:
 type ExpectedResult {
         salesOrderId: sales.SalesOrderHeaders:id;
         salesOrderTotalAmount: sales.SalesOrderHeaders:totalAmount;
-        custumerId: sales.Custumers: id;
-        custumerFullName: String(120);
+        customerId: sales.Customers: id;
+        customerFullName: String(120);
     };
 

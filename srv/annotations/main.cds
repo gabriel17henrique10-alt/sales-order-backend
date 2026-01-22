@@ -24,7 +24,7 @@ annotate MainService.SalesOrderHeaders with @(
     SelectionFields: [
         id,
         totalAmount,
-        custumer_id,
+        customer_id,
         status_id,
         createdAt,
         modifiedAt
@@ -42,7 +42,7 @@ annotate MainService.SalesOrderHeaders with @(
                 {
             $Type                : 'UI.DataField',
             Label: 'Cliente',
-            Value                : custumer_id,
+            Value                : customer_id,
             ![@HTML5.CssDefaults]: {
                 $Type: 'HTML5.CssDefaultsType',
                 width: '18rem',
@@ -110,7 +110,7 @@ annotate MainService.SalesOrderHeaders with @(
             ID: 'customerData',
             $Type: 'UI.ReferenceFacet',
             Label: 'Informações do Cliente',
-            Target: 'custumer/@UI.FieldGroup#CustomerData',
+            Target: 'customer/@UI.FieldGroup#CustomerData',
         },
         {
             ID: 'ItemsData',
@@ -148,18 +148,18 @@ annotate MainService.SalesOrderHeaders with @(
     createdBy   @title: 'Criado por';
     modifiedAt  @title: 'Data de atualização';
     modifiedBy  @title: 'Atualizado pro';
-    custumer    @(
+    customer    @(
         title : 'Cliente',
         Common: {
             Label    : 'Cliente',
             ValueList: {
                 $Type         : 'Common.ValueListType',
-                CollectionPath: 'Custumers',
+                CollectionPath: 'customers',
                 Parameters    : [
                     {
                         $Type            : 'Common.ValueListParameterInOut',
                         ValueListProperty: 'id',
-                        LocalDataProperty: 'custumer_id',
+                        LocalDataProperty: 'customer_id',
                     }
                 ]
             },
@@ -191,7 +191,7 @@ annotate MainService.SalesOrderStatuses with {
     id @Common.Text: description @Common.TextArrangement: #TextOnly;
 };
 
-annotate  MainService.Custumers with @(
+annotate  MainService.Customers with @(
     UI: {
         FieldGroup#CustomerData : {
             $Type : 'UI.FieldGroupType',

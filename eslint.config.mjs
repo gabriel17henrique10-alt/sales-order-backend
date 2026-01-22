@@ -55,7 +55,8 @@ export default [
                 {
                     memberSyntaxSortOrder: ['single', 'all', 'multiple', 'none'],
                     allowSeparatedGroups: true
-                }]
+                }
+            ]
         }
     }
 ];

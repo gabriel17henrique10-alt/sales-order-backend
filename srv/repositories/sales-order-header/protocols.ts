@@ -2,7 +2,7 @@ import { SalesOrderHeaderModel } from '@/models/sales-order-header';
 
 export type CompleteSalesOrderHeader = {
     totalAmount: number;
-    custumerId: string;
+    customerId: string;
     item_quantity: number;
     item_price: number;
     product_id: string;

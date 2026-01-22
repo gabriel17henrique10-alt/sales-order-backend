@@ -1,6 +1,6 @@
 import cds from '@sap/cds';
 
-import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReportByDays';
+import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReport';
 import { SalesReportModel } from '@/models/seles-report';
 import { SalesReportRepository } from './protocols';
 
@@ -26,9 +26,9 @@ export class SalesReportRepositoryImpl implements SalesReportRepository {
         return SELECT.from('sales.SalesOrderHeaders').columns(
             'id as salesOrderId',
             'totalAmount as salesOrderTotalAmount',
-            'custumer.id as customerId',
+            'customer.id as customerId',
             // eslint-disable-next-line quotes
-            `custumer.firstName  || ' ' || custumer.lastName as custumerFullName`
+            `customer.firstName  || ' ' || customer.lastName as customerFullName`
         );
     }
 
@@ -40,8 +40,8 @@ export class SalesReportRepositoryImpl implements SalesReportRepository {
             SalesReportModel.with({
                 salesOrderId: salesReport.salesOrderId as string,
                 salesOrderTotalAmount: salesReport.salesOrderTotalAmount as number,
-                custumerId: salesReport.custumerId as string,
-                custumerFullName: salesReport.custumerFullName as string
+                customerId: salesReport.customerId as string,
+                customerFullName: salesReport.customerFullName as string
             })
         );
     }

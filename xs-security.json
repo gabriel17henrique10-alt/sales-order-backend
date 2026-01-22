@@ -1,7 +1,7 @@
 {
     "xsappname": "sales-order-backend",
     "tenant-mode": "dedicated",
-    "description": "Security profile of Sales Order Backend App",
+    "description": "Security profile of Sales Oder Backend App",
     "scopes": [
         {
             "name": "uaa.user",
@@ -17,7 +17,7 @@
         }
     ],
     "attributes": [
-        {
+         {
             "name": "id",
             "description": "User id",
             "valueType": "string",
@@ -39,31 +39,18 @@
             ]
         },
         {
-            "name": "admin",
+         "name": "admin",
             "description": "Admin",
-            "attribute-references": [
-                "id",
-                "groups"
-            ],
             "scope-references": [
                 "$XSAPPNAME.admin"
             ]
         },
         {
-            "name": "read_only_user",
+         "name": "read_onlu_user",
             "description": "ReadOnly user",
-            "attribute-references": [
-                "id",
-                "groups"
-            ],
             "scope-references": [
                 "$XSAPPNAME.read_only_user"
             ]
         }
-    ],
-    "oauth2-configuration": {
-        "redirect-uris": [
-            "https://53fefce3trial-*/**"
-        ]
-    }
+    ]
 }

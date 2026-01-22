@@ -20,7 +20,7 @@ Authorization: Basic joaozinho:123456
     "payload": [
         {
             "id": "{{id}}",
-            "custumer_id": "{{customerid}}",
+            "customer_id": "{{customerid}}",
             "totalAmount": 398,
             "items": [
                 {

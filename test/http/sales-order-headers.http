@@ -1,4 +1,4 @@
-@localhost=localhost:4004/odata/v4/main
+@localhost=localhost:4004/sales-order
 @id=dc241386-2686-49ab-b3c5-94cfc679678e
 @customerid =923bdf29-d933-4e92-a8c0-75403df6f390
 
@@ -18,7 +18,7 @@ Authorization: Basic joaozinho:123456
 
 {
     "id": "{{id}}",
-    "custumer_id": "{{customerid}}",
+    "customer_id": "{{customerid}}",
     "totalAmount": 398,
     "items": [
         {

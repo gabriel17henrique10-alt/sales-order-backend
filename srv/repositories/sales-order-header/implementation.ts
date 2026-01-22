@@ -15,7 +15,7 @@ export class SalesOrderHeaderRepositoryImpl implements SalesOrderHeaderRepositor
         const sql = SELECT.from('sales.SalesOrderHeaders')
             .columns(
                 'totalAmount',
-                'custumer.id as custumerId',
+                'customer.id as customerId',
                 'items.quantity as item_quantity',
                 'items.price as item_price',
                 'items.product.id as product_id',
@@ -31,7 +31,7 @@ export class SalesOrderHeaderRepositoryImpl implements SalesOrderHeaderRepositor
         const products = this.mapProductsToCompleteSalesOrder(headers);
         const items = this.mapItemsToCompleteSalesOrder(headers, products);
         return SalesOrderHeaderModel.create({
-            custumerId: headers.at(0)?.custumerId as string,
+            customerId: headers.at(0)?.customerId as string,
             items
         });
     }

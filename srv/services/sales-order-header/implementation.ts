@@ -3,8 +3,8 @@ import { User } from '@sap/cds';
 import { SalesOrderHeader, SalesOrderHeaders } from '@models/sales';
 
 import { Payload as BulkCreateSalesOrdersPayload } from '@models/db/types/BulkCreateSalesOrder';
-import { CustumerModel } from '@/models/custumer';
-import { CustumerRepository } from '@/repositories/custumer/protocols';
+import { CustomerModel } from '@/models/customer';
+import { CustomerRepository } from '@/repositories/customer/protocols';
 import { LoggedUserModel } from '@/models/logged-user';
 import { ProductModel } from '@/models/products';
 import { ProductRepository } from '@/repositories/product/protocols';
@@ -18,7 +18,7 @@ import { CreationPayLoadValidationResult, SalesOrderHeaderService } from '@/serv
 export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     constructor(
         private readonly salesOrderHeaderRepository: SalesOrderHeaderRepository,
-        private readonly custumerRepository: CustumerRepository,
+        private readonly customerRepository: CustomerRepository,
         private readonly productRepository: ProductRepository,
         private readonly salesOrderLogRepository: SalesOrderLogRepository
     ) {}
@@ -30,12 +30,12 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         }
         const item = this.getSalesOrderItems(params, productValidation.products as ProductModel[]);
         const header = this.getSalesOrderHeader(params, item);
-        const custumerValidationResult = await this.validateCustomerOnCreation(params);
-        if (custumerValidationResult.hasError) {
-            return custumerValidationResult;
+        const customerValidationResult = await this.validateCustomerOnCreation(params);
+        if (customerValidationResult.hasError) {
+            return customerValidationResult;
         }
         const headervalidationResult = header.validateCreationPayload({
-            custumer_id: (custumerValidationResult.custumer as CustumerModel).id
+            customer_id: (customerValidationResult.customer as CustomerModel).id
         });
         if (headervalidationResult.hasError) {
             return headervalidationResult;
@@ -82,12 +82,12 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
             }
             const item = this.getSalesOrderItems(headerObject, productValidation.products as ProductModel[]);
             const header = this.getSalesOrderHeader(headerObject, item);
-            const custumerValidationResult = await this.validateCustomerOnCreation(headerObject);
-            if (custumerValidationResult.hasError) {
-                return custumerValidationResult;
+            const customerValidationResult = await this.validateCustomerOnCreation(headerObject);
+            if (customerValidationResult.hasError) {
+                return customerValidationResult;
             }
             const headerValidationResult = header.validateCreationPayload({
-                custumer_id: (custumerValidationResult.custumer as CustumerModel).id
+                customer_id: (customerValidationResult.customer as CustomerModel).id
             });
             if (headerValidationResult.hasError) {
                 return headerValidationResult;
@@ -107,7 +107,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
                 error: new Error('Pedido não encontrado')
             };
         }
-        const headerValidationResult = header.validateCreationPayload({ custumer_id: header.custumer_id });
+        const headerValidationResult = header.validateCreationPayload({ customer_id: header.customer_id });
         if (headerValidationResult.hasError) {
             return headerValidationResult;
         }
@@ -142,8 +142,8 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     private async validateCustomerOnCreation(
         header: SalesOrderHeader | BulkCreateSalesOrdersPayload
     ): Promise<CreationPayLoadValidationResult> {
-        const custumer = await this.getCustumer(header);
-        if (!custumer) {
+        const customer = await this.getCustomer(header);
+        if (!customer) {
             return {
                 hasError: true,
                 error: new Error('Customer não encontrado')
@@ -151,7 +151,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         }
         return {
             hasError: false,
-            custumer
+            customer
         };
     }
 
@@ -179,7 +179,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         items: SalesOrderItemModel[]
     ): SalesOrderHeaderModel {
         return SalesOrderHeaderModel.create({
-            custumerId: params.custumer_id as string,
+            customerId: params.customer_id as string,
             items
         });
     }
@@ -190,14 +190,14 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     ): SalesOrderHeaderModel {
         return SalesOrderHeaderModel.with({
             id: params.id as string,
-            custumerId: params.custumer_id as string,
+            customerId: params.customer_id as string,
             totalAmount: params.totalAmount as number,
             items
         });
     }
-    private getCustumer(params: SalesOrderHeader | BulkCreateSalesOrdersPayload): Promise<CustumerModel | null> {
-        const custumerId = params.custumer_id as string;
-        return this.custumerRepository.findById(custumerId);
+    private getCustomer(params: SalesOrderHeader | BulkCreateSalesOrdersPayload): Promise<CustomerModel | null> {
+        const customerId = params.customer_id as string;
+        return this.customerRepository.findById(customerId);
     }
 
     private getLoggedUser(loggedUser: User): LoggedUserModel {

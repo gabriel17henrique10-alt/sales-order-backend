@@ -1,11 +1,11 @@
 @localhost=localhost:4004/odata/v4/main
 @id =923bdf29-d933-4e92-a8c0-75403df6f390
-GET http://{{localhost}}/Custumers
+GET http://{{localhost}}/customers
 Content-Type: application/json
 
 ###
 
-POST  http://{{localhost}}/Custumers
+POST  http://{{localhost}}/customers
 Content-Type: application/json
 Authorization: Basic joaozinho:123456
 
@@ -16,7 +16,7 @@ Authorization: Basic joaozinho:123456
     "email":"Gabriel@gmail.com"
 }
 
-# entity Custumers{
+# entity customers{
 #     key id: UUID;
 #         firstName: String(20);
 #         lastName: String(100);
@@ -25,12 +25,12 @@ Authorization: Basic joaozinho:123456
 
 ###
 
-DELETE  http://{{localhost}}/Custumers({{id}})
+DELETE  http://{{localhost}}/customers({{id}})
 Content-Type: application/json
 
 ###
 
-PUT  http://{{localhost}}/Custumers(id={{id}})
+PUT  http://{{localhost}}/customers(id={{id}})
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 
 ###
 
-PATCH  http://{{localhost}}/Custumers(id={{id}})
+PATCH  http://{{localhost}}/customers(id={{id}})
 Content-Type: application/json
 
 {
@@ -48,5 +48,5 @@ Content-Type: application/json
 
 ###
 
-GET http://{{localhost}}/Custumers?$filter=endswith(firstName,'-')
+GET http://{{localhost}}/customers?$filter=endswith(firstName,'-')
 Content-Type: application/json

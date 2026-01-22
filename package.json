@@ -44,5 +44,8 @@
     "deploy": "cf deploy mta_archives/sales-order-backend.mtar --retries 0",
     "bd": "npm-run-all clean build deploy"
   },
-  "private": true
+  "private": true,
+  "imports": {
+    "#cds-models/*": "./@cds-models/*/index.js"
+  }
 }

@@ -11,7 +11,7 @@ entity SalesOrderHeaders {
         createdBy  : User      @cds.on.insert : $user;
         modifiedAt : Timestamp @cds.on.insert : $now  @cds.on.update : $now;
         modifiedBy : User      @cds.on.insert : $user @cds.on.update : $user;
-        custumer: Association to Custumers;
+        customer: Association to Customers;
         status: Association to SalesOrderStatuses;
         items: Composition of many SalesOrderItems on items.header = $self;
 
@@ -41,12 +41,12 @@ entity SalesOrderStatuses {
     description: localized String;
 }
 
-entity Custumers{
+entity Customers{
     key id: UUID;
         firstName: String(20);
         lastName: String(100);
         email: String(255);
-        salesOrders: Association to many SalesOrderHeaders on salesOrders.custumer = $self;
+        salesOrders: Association to many SalesOrderHeaders on salesOrders.customer = $self;
 }
 
 entity Products{

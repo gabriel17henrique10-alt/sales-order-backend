@@ -2,20 +2,20 @@ import { SalesOrderItemModel, SalesOrderItemPropsWithSnakeCaseProductId } from '
 
 type SalesOrderHeaderProps = {
     id: string;
-    custumerId: string;
+    customerId: string;
     totalAmount: number;
     items: SalesOrderItemModel[];
 };
 
 type SalesOrderHeaderPropsWithoutIdAndTotalAmount = Omit<SalesOrderHeaderProps, 'id' | 'totalAmount'>;
 
-type SalesOrderHeaderPropsWithSnakeCaseCustomerId = Omit<SalesOrderHeaderProps, 'custumerId' | 'items'> & {
-    custumer_id: SalesOrderHeaderProps['custumerId'];
+type SalesOrderHeaderPropsWithSnakeCaseCustomerId = Omit<SalesOrderHeaderProps, 'customerId' | 'items'> & {
+    customer_id: SalesOrderHeaderProps['customerId'];
     items: SalesOrderItemPropsWithSnakeCaseProductId[];
 };
 
 type CreationPayLoad = {
-    custumer_id: SalesOrderHeaderProps['custumerId'];
+    customer_id: SalesOrderHeaderProps['customerId'];
 };
 
 type CreationPayLoadValidationResult = {
@@ -42,8 +42,8 @@ export class SalesOrderHeaderModel {
         return this.props.id;
     }
 
-    public get custumer_id() {
-        return this.props.custumerId;
+    public get customer_id() {
+        return this.props.customerId;
     }
 
     public get totalAmount() {
@@ -59,9 +59,9 @@ export class SalesOrderHeaderModel {
     }
 
     public validateCreationPayload(params: CreationPayLoad): CreationPayLoadValidationResult {
-        const custumerValidationResult = this.validateCustumerOnCreation(params.custumer_id);
-        if (custumerValidationResult.hasError) {
-            return custumerValidationResult;
+        const customerValidationResult = this.validateCustomerOnCreation(params.customer_id);
+        if (customerValidationResult.hasError) {
+            return customerValidationResult;
         }
         const itemsValidationResult = this.validateItemsOnCreation(this.items);
         if (itemsValidationResult.hasError) {
@@ -71,13 +71,13 @@ export class SalesOrderHeaderModel {
             hasError: false
         };
     }
-    private validateCustumerOnCreation(
-        custumerId: SalesOrderHeaderProps['custumerId']
+    private validateCustomerOnCreation(
+        customerId: SalesOrderHeaderProps['customerId']
     ): CreationPayLoadValidationResult {
-        if (!custumerId) {
+        if (!customerId) {
             return {
                 hasError: true,
-                error: new Error('Custumer invalido')
+                error: new Error('Customer invalido')
             };
         }
         return {
@@ -141,7 +141,7 @@ export class SalesOrderHeaderModel {
     public toCreationObject(): SalesOrderHeaderPropsWithSnakeCaseCustomerId {
         return {
             id: this.props.id,
-            custumer_id: this.props.custumerId,
+            customer_id: this.props.customerId,
             totalAmount: this.calculateDiscount(),
             items: this.props.items.map((item) => item.toCreationObject())
         };
