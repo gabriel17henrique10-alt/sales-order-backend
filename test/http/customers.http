@@ -1,11 +1,12 @@
-@localhost=localhost:4004/odata/v4/main
+@localhost=localhost:4004/sales-order
 @id =923bdf29-d933-4e92-a8c0-75403df6f390
-GET http://{{localhost}}/customers
+GET http://{{localhost}}/Customers
 Content-Type: application/json
+Authorization: Basic joaozinho:123456
 
 ###
 
-POST  http://{{localhost}}/customers
+POST  http://{{localhost}}/Customers
 Content-Type: application/json
 Authorization: Basic joaozinho:123456
 
@@ -25,12 +26,12 @@ Authorization: Basic joaozinho:123456
 
 ###
 
-DELETE  http://{{localhost}}/customers({{id}})
+DELETE  http://{{localhost}}/Customers({{id}})
 Content-Type: application/json
 
 ###
 
-PUT  http://{{localhost}}/customers(id={{id}})
+PUT  http://{{localhost}}/Customers(id={{id}})
 Content-Type: application/json
 
 {
@@ -39,7 +40,7 @@ Content-Type: application/json
 
 ###
 
-PATCH  http://{{localhost}}/customers(id={{id}})
+PATCH  http://{{localhost}}/Customers(id={{id}})
 Content-Type: application/json
 
 {
@@ -48,5 +49,5 @@ Content-Type: application/json
 
 ###
 
-GET http://{{localhost}}/customers?$filter=endswith(firstName,'-')
+GET http://{{localhost}}/Customers?$filter=endswith(firstName,'-')
 Content-Type: application/json
