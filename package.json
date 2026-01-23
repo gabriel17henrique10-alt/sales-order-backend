@@ -12,6 +12,7 @@
     "passport": "^0.7.0"
   },
   "devDependencies": {
+    "@cap-js/cds-test": "^0.4.1",
     "@cap-js/cds-typer": "^0.38.0",
     "@cap-js/cds-types": "^0.15.0",
     "@cap-js/sqlite": "^2",
@@ -20,6 +21,7 @@
     "@types/axios": "^0.14.4",
     "@types/chai": "^5.2.3",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
     "@types/module-alias": "^2.0.4",
     "@types/node": "^25.0.3",
     "@vitest/coverage-v8": "^4.0.17",
@@ -28,10 +30,13 @@
     "eslint-plugin-prettier": "^5.5.4",
     "git-commit-msg-linter": "^5.0.8",
     "globals": "^17.0.0",
+    "jest": "^30.2.0",
     "mbt": "^1.2.34",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.7.4",
     "rimraf": "^6.1.2",
+    "ts-jest": "^29.4.6",
+    "tsconfig-paths": "^4.2.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.52.0",
@@ -46,7 +51,8 @@
     "deploy": "cf deploy mta_archives/sales-order-backend.mtar --retries 0",
     "bd": "npm-run-all clean build deploy",
     "test:unit": "vitest --dir test/unit",
-    "test:coverage": "vitest --coverage --run --silent"
+    "test:coverage": "vitest --coverage --run --silent",
+    "test:e2e": "jest --watch"
   },
   "private": true,
   "imports": {
