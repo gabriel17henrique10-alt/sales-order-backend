@@ -20,7 +20,7 @@
                 },
                 "joaozinho": {
                     "password": "123456",
-                    "roles": ["read_only_user"],
+                    "roles": ["read_only_user", "admin"],
                     "attr": {
                         "id": 2,
                         "groups": ["grupo1"]
