@@ -1,12 +1,12 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
+      "isolatedModules": true,
       "target": "ES2024",
-      "module": "NodeNext",
-      "moduleResolution": "nodenext",
+      "module": "Node16",
+      "moduleResolution": "node16",
       "strict": true, 
       "strictNullChecks": true,
-      "noImplicitAny": false, //this not permit an variable whithout type
+      "noImplicitAny": false,
       "esModuleInterop": true,
       "outDir": "./dist",
       "baseUrl": "./",
